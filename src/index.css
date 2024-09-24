@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.common-background {
+    background-image: url('./assets/img1.jpg'); /* Replace with your actual image path */
+    background-size: cover;
+    background-position: center;
+  }
+
+  .table-tennis-background {
+    background-image: url('./assets/img3.jpg'); /* Replace with your actual image path */
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .badminton-background {
+    background-image: url('./assets/img2.jpg'); /* Replace with your actual image path */
+    background-size: cover;
+    background-position: center;
+  }
+
+
+  
+  
