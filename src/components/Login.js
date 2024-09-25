@@ -1,55 +1,85 @@
-// src/Login.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Here you can add your login logic, e.g., authentication API call
-    // For demonstration, we'll just redirect to the home page
-    if (username && password) {
-      // Simulate successful login
-      localStorage.setItem('isLoggedIn', 'true'); // Store login state
-      navigate('/home'); // Redirect to the home page after successful login
+  const handleLogin = () => {
+    // Simulating a login process with hardcoded credentials
+    if (username === 'user' && password === 'password') {
+      toast.success('Logged in successfully!', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      navigate('/home'); // Redirect to home after successful login
     } else {
-      alert('Please fill in all fields');
+      toast.error('Invalid username or password', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleLogin();
     }
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-cover bg-center login-background">
-      <div className="absolute inset-0 bg-black opacity-50"></div>
-      <div className="relative z-10 text-center p-5 bg-white rounded-lg shadow-lg max-w-md">
-        <h1 className="text-2xl font-bold mb-4">Login</h1>
-        <form onSubmit={handleSubmit}>
+    <div className="flex items-center justify-center h-screen bg-cover bg-center login-background common-background"> {/* Match styles here */}
+      <div className="absolute inset-0 bg-black opacity-50"></div> {/* Optional overlay for better text visibility */}
+      <div className="relative z-10 w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
+        <h2 className="text-3xl font-bold text-center text-gray-900">Login</h2>
+        <div className="space-y-4">
           <input
             type="text"
             placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className="border border-gray-300 p-2 rounded mb-4 w-full"
-            required
+            onKeyDown={handleKeyDown} 
+            className="w-full px-4 py-2 text-gray-900 bg-gray-200 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
             type="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="border border-gray-300 p-2 rounded mb-4 w-full"
-            required
+            onKeyDown={handleKeyDown} 
+            className="w-full px-4 py-2 text-gray-900 bg-gray-200 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-          <button
-            type="submit"
-            className="bg-blue-500 text-white px-6 py-2 rounded-lg w-full transition duration-300 ease-in-out hover:bg-blue-600"
-          >
-            Login
-          </button>
-        </form>
+        </div>
+        <button
+          onClick={handleLogin}
+          className="w-full px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          Login
+        </button>
       </div>
+      <ToastContainer 
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        closeOnClick 
+        pauseOnHover 
+        draggable 
+        progress={undefined} 
+      />
     </div>
   );
 };

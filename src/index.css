@@ -21,6 +21,12 @@
     background-position: center;
   }
 
+  .login-background {
+    background-image: url('./assets/img1.jpg'); /* Replace with your actual image path */
+    background-size: cover;
+    background-position: center;
+  }
+
 
   
   
